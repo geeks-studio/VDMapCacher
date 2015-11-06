@@ -54,22 +54,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nXu-1S-W65">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="150" width="600" height="300"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="fGx-YV-DFa"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="nXu-1S-W65" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="3ct-wq-Ahf"/>
-                            <constraint firstItem="nXu-1S-W65" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="top" id="ZFg-iK-Ouo"/>
-                            <constraint firstAttribute="bottom" secondItem="nXu-1S-W65" secondAttribute="bottom" id="hu4-QP-1pT"/>
-                            <constraint firstAttribute="trailing" secondItem="nXu-1S-W65" secondAttribute="trailing" id="wKn-DV-nYV"/>
+                            <constraint firstAttribute="trailing" secondItem="nXu-1S-W65" secondAttribute="trailing" id="nKU-vB-5dW"/>
+                            <constraint firstItem="nXu-1S-W65" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="sIO-1a-2kj"/>
+                            <constraint firstItem="nXu-1S-W65" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="txC-sz-H5g"/>
+                            <constraint firstItem="nXu-1S-W65" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="ve3-IU-OBy"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Overview Map" image="second" id="cPa-gy-q4n"/>
                     <connections>
-                        <outlet property="imageView" destination="nXu-1S-W65" id="aWn-6g-Nis"/>
+                        <outlet property="imageViewClear" destination="nXu-1S-W65" id="dVG-25-Z5e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

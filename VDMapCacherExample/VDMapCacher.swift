@@ -135,7 +135,6 @@ class VDMapCacher {
             return  CGFloat(part1 - part2)
         }
         
-        // Sort points lexicographically
         let points = points_.sort() {
             $0.latitude == $1.latitude ? $0.longitude < $1.longitude : $0.latitude < $1.latitude
         }
@@ -143,39 +142,36 @@ class VDMapCacher {
         // Build the lower hull
         var lower: [CLLocationCoordinate2D] = []
         for p in points {
-            while lower.count >= 2 && cross(lower[lower.count-2], A: lower[lower.count-1], B: p) <= 0 {
+            while lower.count >= 2 && cross(lower[lower.count - 2], A: lower[lower.count - 1], B: p) <= 0 {
                 lower.removeLast()
             }
             lower.append(p)
         }
         
-        // Build upper hull
+        // Build the upper hull
         var upper: [CLLocationCoordinate2D] = []
         for p in points.reverse() {
-            while upper.count >= 2 && cross(upper[upper.count-2], A: upper[upper.count-1], B: p) <= 0 {
+            while upper.count >= 2 && cross(upper[upper.count - 2], A: upper[upper.count - 1], B: p) <= 0 {
                 upper.removeLast()
             }
             upper.append(p)
         }
-        
-        // Last point of upper list is omitted because it is repeated at the
-        // beginning of the lower list.
         upper.removeLast()
-        
-        // Concatenation of the lower and upper hulls gives the convex hull.
         upper.appendContentsOf(lower)
         return upper
     }
     
     func generateMapForRouteInView(imageView: UIImageView?, line: CGFloat, size: CGSize) {
         // Find the midpoint to use as the center of the region
-        let a = closedConvexHull(departureCoords!)[0]
-        let b = closedConvexHull(arrivalCoords!)[0]
+        var allCoords = departureCoords!
+        allCoords.appendContentsOf(arrivalCoords!)
+        let hull = closedConvexHull(allCoords)
+        let a = hull[0]
+        let b = hull[1]
         let midpoint = findMidpointBetweenPoint(a, andPoint: b)
         
         let theSpan = MKCoordinateSpanMake(CLLocationDegrees(180), CLLocationDegrees(180))
         let theRegion = MKCoordinateRegionMake(midpoint, theSpan)
-//        let theRegion = MKCoordinateRegionForMapRect(MKMapRectWorld)
         
         if let imageView = imageView {
             requestSnapshotDataOfSize(size, region: theRegion) { (image, error) -> () in

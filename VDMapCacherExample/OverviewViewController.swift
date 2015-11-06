@@ -34,24 +34,25 @@ extension OverviewViewController: ImageGeneratedProtocol {
         imageView.setNeedsLayout()
         let snapshot = imageView.snapshot()
         imageView.layer.sublayers = nil
-        imageView.image = imageResize(snapshot, sizeChange: CGSize(width: 320, height: 300))
+        imageViewClear.image = imageResize(snapshot, sizeChange: CGSize(width: 320, height: 300))
     }
 }
 
 class OverviewViewController: UIViewController {
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageViewClear: UIImageView!
+    let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 1900, height: 1000))
     let mapCacher = VDMapCacher()
     
     func setUpCacher() {
         mapCacher.delegate = self
-        mapCacher.departureCoords = [Constants.sydney, Constants.moscow, Constants.ny]
-        mapCacher.arrivalCoords = [Constants.tokyo, Constants.sydney, Constants.dehli]
+        mapCacher.departureCoords = [Constants.moscow, Constants.ny, Constants.saint]
+        mapCacher.arrivalCoords = [Constants.sydney, Constants.dehli, Constants.tokyo]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCacher()
-        mapCacher.generateMapForRouteInView(imageView, line: 2.0, size: CGSize(width: 320, height: 300))
+        mapCacher.generateMapForRouteInView(imageView, line: 6.0, size: CGSize(width: 1900, height: 1000))
     }
 
 
